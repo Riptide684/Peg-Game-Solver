@@ -182,7 +182,7 @@ class Solver():
     
     def display(self):
         for board in self.states_to_explore:
-            display(board)
+            display(board, self.game.board_size)
             print('')
     
     def solve(self):
@@ -211,9 +211,9 @@ class Solver():
         print('Performance test completed!')
 
 
-def display(board):
+def display(board, size):
     board = format(board, '049b')
-    rows = [board[7*i: 7*(i+1)] for i in range(7)]
+    rows = [board[size*i: 7*(i+1)] for i in range(size)]
     print('\n'.join(rows))
 
 def delta_swap(b, mask, delta):
