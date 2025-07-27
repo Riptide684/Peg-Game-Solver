@@ -8,5 +8,6 @@ To view the output as a game, you can run show_game(moves, args).
 
 ### To do ###
 - Port to C++
-- Exec the move gen function
 - Investigate numba
+- Implement a DFS option
+

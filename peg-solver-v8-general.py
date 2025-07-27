@@ -115,21 +115,6 @@ class Game():
 
         exec("\n".join(func), globals())
 
-    def rotate(self, b):
-        return flip_vertical(flip_diag(b))
-
-    def get_symms(self):
-        b = self.board
-        symms = [b]
-        for i in range(3):
-            b = self.rotate(b)
-            symms.append(b)
-
-        for j in range(4):
-            symms.append(flip_vertical(symms[j]))
-
-        return symms
-
     def gen_moves(self):
         moves = []
         
@@ -171,7 +156,7 @@ class Solver():
                 self.game.board = board_state
                 self.game.make_move(move)
 
-                symm_boards = self.game.get_symms()
+                symm_boards = get_symms(self.game.board)
                 for b in symm_boards:
                     if b in layer:
                         break
@@ -213,12 +198,26 @@ class Solver():
 
 def display(board, size):
     board = format(board, '049b')
-    rows = [board[size*i: 7*(i+1)] for i in range(size)]
+    rows = [board[size*i: size*(i+1)] for i in range(size)]
     print('\n'.join(rows))
 
 def delta_swap(b, mask, delta):
    x = (b ^ (b >> delta)) & mask
    return   x ^ (x << delta)  ^ b
+
+def rotate(b):
+    return flip_vertical(flip_diag(b))
+
+def get_symms(b):
+    symms = [b]
+    for i in range(3):
+        b = rotate(b)
+        symms.append(b)
+
+    for j in range(4):
+        symms.append(flip_vertical(symms[j]))
+
+    return symms
 
 def show_game(moves, shape, start, size):
     game = Game(shape, size)
@@ -232,5 +231,5 @@ def show_game(moves, shape, start, size):
 
 
 if __name__ == '__main__':
-    solver = Solver(0b0011100011111011111111111111111111101111100011100, 0b0011100011111011101111111111111111101111100011100, 7)
-    solver.solve()
+    solver = Solver()
+    solver.perft()
