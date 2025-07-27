@@ -7,6 +7,6 @@ Open v8, create an instance `solver` of `Solver`, and run `solver.Solver(args)`,
 To view the output as a game, you can run show_game(moves, args).
 
 ### To do ###
-Port to C++
-Exec the move gen function
-Investigate numba
+- Port to C++
+- Exec the move gen function
+- Investigate numba
