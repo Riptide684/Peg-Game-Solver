@@ -8,5 +8,3 @@ To view the output as a game, you can run show_game(moves, args).
 
 ### To do ###
 - Port to C++
-- Investigate numba
-
